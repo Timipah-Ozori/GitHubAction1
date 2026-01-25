@@ -1,0 +1,25 @@
+{
+  "name": "githubaction1",
+  "version": "1.0.0",
+  "description": "Simple Express.js server serving a static web page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Timipah-Ozori/GitHubAction1.git"
+  },
+  "homepage": "https://github.com/Timipah-Ozori/GitHubAction1#readme",
+  "bugs": {
+    "url": "https://github.com/Timipah-Ozori/GitHubAction1/issues"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+
