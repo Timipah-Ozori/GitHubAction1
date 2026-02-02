@@ -44,7 +44,8 @@ jobs:
 
       - # Runs tests as defined in the project's package.json
         run: npm test
-deploy:
+        
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
