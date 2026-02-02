@@ -59,14 +59,19 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             # Navigate to app folder or clone if missing
-            cd ~/GitHubAction1 || git clone -b main https://github.com/${{ github.repository }} ~/GitHubAction1 && cd ~/GitHubAction1
-            # Pull latest changes
-            git reset --hard origin/main
-            # Install dependencies
-            npm install
-            # Stop old app if running
-            pm2 delete server || true
-            # Start app with PM2
-            pm2 start server.js --name server
-            # Save PM2 process list
-            pm2 save
+          cd ~/GitHubAction1 || git clone -b main https://github.com/${{ github.repository }} ~/GitHubAction1 && cd ~/GitHubAction1
+
+          # Pull latest changes
+          git reset --hard origin/main
+
+          # Install dependencies
+          npm install
+
+          # Stop old app if running
+          pm2 delete server || true
+
+          # Start app with PM2
+          pm2 start server.js --name server
+
+          # Save PM2 process list (auto restart on reboot)
+          pm2 save
