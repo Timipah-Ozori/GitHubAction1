@@ -44,12 +44,12 @@ jobs:
 
       - # Runs tests as defined in the project's package.json
         run: npm test
-
-  deploy:
+deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
         with:
@@ -67,8 +67,11 @@ jobs:
             npm install
 
             # Stop old app if running
-            pkill -f "node server.js" || true
+            pm2 delete server || true
 
-            # Start app in background
-            nohup node server.js > app.log 2>&1 &
+            # Start app with PM2
+            pm2 start server.js --name server
+
+            # Save PM2 process list
+            pm2 save
 
