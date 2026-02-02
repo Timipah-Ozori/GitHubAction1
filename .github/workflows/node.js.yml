@@ -44,12 +44,13 @@ jobs:
 
       - # Runs tests as defined in the project's package.json
         run: npm test
-
+        
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
         with:
@@ -59,16 +60,13 @@ jobs:
           script: |
             # Navigate to app folder or clone if missing
             cd ~/GitHubAction1 || git clone -b main https://github.com/${{ github.repository }} ~/GitHubAction1 && cd ~/GitHubAction1
-
             # Pull latest changes
             git reset --hard origin/main
-
             # Install dependencies
             npm install
-
             # Stop old app if running
-            pkill -f "node server.js" || true
-
-            # Start app in background
-            nohup node server.js > app.log 2>&1 &
-
+            pm2 delete server || true
+            # Start app with PM2
+            pm2 start server.js --name server
+            # Save PM2 process list
+            pm2 save
