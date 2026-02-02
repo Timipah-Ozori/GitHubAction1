@@ -61,7 +61,7 @@ jobs:
             # Navigate to app folder or clone if missing
           cd ~/GitHubAction1 || git clone -b main https://github.com/${{ github.repository }} ~/GitHubAction1 && cd ~/GitHubAction1
 
-          # Pull latest changes
+          # Pull latest changess
           git reset --hard origin/main
 
           # Install dependencies
